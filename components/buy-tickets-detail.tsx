@@ -36,10 +36,15 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0)
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false)
 
-  // Read SOLD OUT state controlled from the admin panel (WEEKEND EVENTS section)
-  // Each weekend event is independent: this page only reflects its own event ("weekend-1").
+  // Read SOLD OUT state controlled from the admin panel (WEEKEND EVENTS section).
+  // Each weekend event is independent: every card reflects the SOLD OUT state of its
+  // matching event in the store (by position). The helper below resolves a card's
+  // own soldOut value, falling back to false when there is no matching store event.
   const { events: weekendEventsData } = useWeekendEvents()
-  const isSoldOut = weekendEventsData.find((e) => e.id === "weekend-1")?.soldOut ?? false
+  const getSoldOut = (index: number) => weekendEventsData[index]?.soldOut ?? false
+  // The bottom ticket cards (individual / VIP / limited spots) only sell out when
+  // every weekend event is marked as SOLD OUT in the admin panel.
+  const allSoldOut = weekendEventsData.length > 0 && weekendEventsData.every((e) => e.soldOut)
 
   const galleryMedia = [
     { type: "image", src: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&q=80", alt: "Weekend event 1" },
@@ -191,7 +196,9 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
 
       {/* Event Cards */}
       <main className="px-2 sm:px-3 md:px-8 pb-6 sm:pb-8 space-y-3 sm:space-y-4">
-        {weekendEvents.map((event) => (
+        {weekendEvents.map((event, index) => {
+          const cardSoldOut = getSoldOut(index)
+          return (
           <div
             key={event.id}
             className="bg-zinc-900/60 border border-white/10 rounded-lg sm:rounded-xl overflow-hidden"
@@ -252,7 +259,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
                     <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
                     <span className="text-[9px] sm:text-xs md:text-sm tracking-wider">{event.time}</span>
                   </div>
-                  {isSoldOut ? (
+                  {cardSoldOut ? (
                     <div className="px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 text-[9px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] border border-red-600/50 bg-red-600/10 text-red-500 cursor-not-allowed">
                       SOLD OUT
                     </div>
@@ -280,7 +287,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/80 via-transparent to-transparent md:bg-gradient-to-r md:from-zinc-900 md:via-transparent md:to-transparent" />
                 {/* SOLD OUT Badge */}
-                {isSoldOut && (
+                {cardSoldOut && (
                   <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10">
                     <div className="bg-red-600 px-4 sm:px-6 py-1.5 sm:py-2 shadow-lg rotate-45">
                       <span className="text-white text-base sm:text-xl md:text-2xl font-bold tracking-wider">SOLD OUT</span>
@@ -290,7 +297,8 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
               </div>
             </div>
           </div>
-        ))}
+          )
+        })}
 
         {/* Aftermovie Section */}
         <div className="mt-4 sm:mt-6">
@@ -369,7 +377,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
                   <span className="text-white/50 text-[10px] sm:text-xs md:text-sm ml-1 sm:ml-2">COP</span>
                 </div>
                 <p className="text-white/40 text-[8px] sm:text-[10px] md:text-xs tracking-wider mb-2 sm:mb-3 md:mb-4">ENTRADA POR PERSONA</p>
-                {isSoldOut ? (
+                {allSoldOut ? (
                   <div className="w-full py-2 sm:py-2.5 md:py-3 text-[9px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-center border border-red-600/50 bg-red-600/10 text-red-500 cursor-not-allowed">
                     SOLD OUT
                   </div>
@@ -399,7 +407,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
                   <span className="text-white/50 text-[10px] sm:text-xs md:text-sm ml-1 sm:ml-2">COP</span>
                 </div>
                 <p className="text-white/40 text-[8px] sm:text-[10px] md:text-xs tracking-wider mb-2 sm:mb-3 md:mb-4">NORMALMENTE $700K - $2M</p>
-                {isSoldOut ? (
+                {allSoldOut ? (
                   <div className="w-full py-2 sm:py-2.5 md:py-3 text-[9px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] text-center border border-red-600/50 bg-red-600/10 text-red-500 cursor-not-allowed">
                     SOLD OUT
                   </div>
@@ -429,7 +437,7 @@ export default function BuyTicketsDetail({ onNavigate }: BuyTicketsDetailProps) 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light italic tracking-wider text-white/80 mb-2 sm:mb-3 md:mb-4">
                 LOS CUPOS SON LIMITADOS.
               </p>
-              {isSoldOut ? (
+              {allSoldOut ? (
                 <div className="inline-flex items-center gap-1.5 sm:gap-2 border-2 border-red-600 bg-red-600/10 text-red-500 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 text-[9px] sm:text-xs md:text-sm tracking-[0.1em] sm:tracking-[0.15em] font-bold cursor-not-allowed">
                   SOLD OUT
                 </div>

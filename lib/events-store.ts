@@ -40,8 +40,9 @@ const defaultSignatureEvents: EventOption[] = [
 
 // Default data - Weekend Events
 const defaultWeekendEvents: EventOption[] = [
-  { id: "weekend-1", name: "WEEKEND EVENTS", subtitle: "WEEKEND EXPERIENCE", image: "https://f005.backblazeb2.com/file/b21of1firm/background/SEhome.jpg", category: "weekend", isEditable: true, description: "Fines de semana increibles", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
-  { id: "special-edition", name: "SPECIAL EDITION", subtitle: "LIMITED EXPERIENCE", image: "https://f005.backblazeb2.com/file/b21of1firm/background/BThome.png", category: "weekend", isEditable: true, description: "Ediciones limitadas y exclusivas", location: "Barranquilla, Colombia", ticketPrice: "$50.000 COP", vipPrice: "$450.000 COP", vipNote: "Mesa VIP 10 personas" },
+  { id: "weekend-1", name: "ELITE WEEKEND NIGHT", subtitle: "VIERNES", image: "https://f005.backblazeb2.com/file/b21of1firm/background/SEhome.jpg", category: "weekend", isEditable: true, description: "Fines de semana increibles", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
+  { id: "weekend-2", name: "SECRET PARTY VIP", subtitle: "SÁBADO", image: "https://f005.backblazeb2.com/file/b21of1firm/background/BThome.png", category: "weekend", isEditable: true, description: "Vive el fin de semana como nunca", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
+  { id: "weekend-3", name: "ANIMAL AFTERMOVIE", subtitle: "DOMINGO", image: "https://f005.backblazeb2.com/file/b21of1firm/background/SEhome.jpg", category: "weekend", isEditable: true, description: "Revive la experiencia", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
 ]
 
 // Helper to get data from localStorage

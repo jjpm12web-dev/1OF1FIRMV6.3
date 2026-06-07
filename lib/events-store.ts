@@ -22,6 +22,12 @@ export interface EventOption {
   dateLabel?: string
   dateSubtitle?: string
   soldOut?: boolean
+  // Weekend card specific fields (rendered on the public Weekend Events page)
+  dayLabel?: string
+  venue?: string
+  ageRestriction?: string
+  ageNote?: string
+  buttonText?: string
 }
 
 // LocalStorage keys
@@ -40,9 +46,9 @@ const defaultSignatureEvents: EventOption[] = [
 
 // Default data - Weekend Events
 const defaultWeekendEvents: EventOption[] = [
-  { id: "weekend-1", name: "ELITE WEEKEND NIGHT", subtitle: "VIERNES", image: "https://f005.backblazeb2.com/file/b21of1firm/background/SEhome.jpg", category: "weekend", isEditable: true, description: "Fines de semana increibles", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
-  { id: "weekend-2", name: "SECRET PARTY VIP", subtitle: "SÁBADO", image: "https://f005.backblazeb2.com/file/b21of1firm/background/BThome.png", category: "weekend", isEditable: true, description: "Vive el fin de semana como nunca", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
-  { id: "weekend-3", name: "ANIMAL AFTERMOVIE", subtitle: "DOMINGO", image: "https://f005.backblazeb2.com/file/b21of1firm/background/SEhome.jpg", category: "weekend", isEditable: true, description: "Revive la experiencia", location: "Barranquilla, Colombia", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
+  { id: "weekend-1", name: "ELITE WEEKEND", subtitle: "NIGHT", image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80", category: "weekend", isEditable: true, description: "LA EXPERIENCIA QUE NUNCA OLVIDAS", date: "VIERNES 16 DE MAYO", time: "9:00 PM", location: "BARRANQUILLA", venue: "DISCOLO NIGHT CLUB", ageRestriction: "+14", ageNote: "MÁS SALVAJE. +14 SIN ALCOHOL", dayLabel: "VIERNES", buttonText: "COMPRAR", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
+  { id: "weekend-2", name: "SECRET PARTY", subtitle: "VIP", image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80", category: "weekend", isEditable: true, description: "VIVE EL FIN DE SEMANA COMO NUNCA", date: "SÁBADO 17 DE MAYO", time: "9:00 PM", location: "BARRANQUILLA", venue: "DISCOLO NIGHT CLUB", ageRestriction: "+14", ageNote: "MÁS SALVAJE. +14 SIN ALCOHOL", dayLabel: "SÁBADO", buttonText: "COMPRAR", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
+  { id: "weekend-3", name: "ANIMAL", subtitle: "AFTERMOVIE", image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80", category: "weekend", isEditable: true, description: "REVIVE LA EXPERIENCIA COMO SI ESTUVIERAS AHÍ", date: "DOMINGO 18 DE MAYO", time: "8:00 PM", location: "BARRANQUILLA", venue: "DISCOLO NIGHT CLUB", ageRestriction: "+14", ageNote: "MÁS SALVAJE. +14 SIN ALCOHOL", dayLabel: "DOMINGO", buttonText: "COMPRAR", ticketPrice: "$40.000 COP", vipPrice: "$400.000 COP", vipNote: "Mesa VIP 10 personas" },
 ]
 
 // Helper to get data from localStorage
